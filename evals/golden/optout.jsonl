@@ -1,0 +1,20 @@
+{"thread_id": "o01", "from_email": "owner@bigrig.com", "subject": "Re: Northwind oil", "body": "stop", "is_opt_out": true}
+{"thread_id": "o02", "from_email": "mgr@lonestar.com", "subject": "Re: bulk pricing", "body": "unsubscribe", "is_opt_out": true}
+{"thread_id": "o03", "from_email": "joe@joesauto.com", "subject": "Re: intro", "body": "Stop please", "is_opt_out": true}
+{"thread_id": "o04", "from_email": "shop@euroauto.com", "subject": "Re: oil quote", "body": "please remove me from your list", "is_opt_out": true}
+{"thread_id": "o05", "from_email": "front@quicklube.com", "subject": "Re: net-30", "body": "stop emailing me", "is_opt_out": true}
+{"thread_id": "o06", "from_email": "ops@fleetco.com", "subject": "Re: follow up", "body": "Please take me off your mailing list, I'm not the right contact.", "is_opt_out": true}
+{"thread_id": "o07", "from_email": "owner@autobahn.com", "subject": "Re: hello", "body": "opt me out of these emails", "is_opt_out": true}
+{"thread_id": "o08", "from_email": "admin@discounttire.com", "subject": "Re: oil", "body": "do not contact me again about this", "is_opt_out": true}
+{"thread_id": "o09", "from_email": "mike@mobilemech.com", "subject": "Re: intro", "body": "remove me", "is_opt_out": true}
+{"thread_id": "o10", "from_email": "owner@bigrig.com", "subject": "Re: Northwind oil", "body": "stop by anytime, the door's open", "is_opt_out": false}
+{"thread_id": "o11", "from_email": "mgr@lonestar.com", "subject": "Re: visit", "body": "you can stop by the shop on Tuesday if you'd like", "is_opt_out": false}
+{"thread_id": "o12", "from_email": "ops@fleetco.com", "subject": "Re: delivery", "body": "non-stop deliveries are great, that's exactly what we need", "is_opt_out": false}
+{"thread_id": "o13", "from_email": "joe@joesauto.com", "subject": "Re: terms", "body": "what's your net-30 terms?", "is_opt_out": false}
+{"thread_id": "o14", "from_email": "shop@euroauto.com", "subject": "Re: quote", "body": "send me a quote for 50 gallons", "is_opt_out": false}
+{"thread_id": "o15", "from_email": "front@quicklube.com", "subject": "Re: intro", "body": "not interested right now", "is_opt_out": false}
+{"thread_id": "o16", "from_email": "owner@autobahn.com", "subject": "Re: oil", "body": "we never stop running here, send the spec sheet", "is_opt_out": false}
+{"thread_id": "o17", "from_email": "admin@discounttire.com", "subject": "Re: pricing", "body": "can you send pricing on hydraulic fluid too?", "is_opt_out": false}
+{"thread_id": "o18", "from_email": "mike@mobilemech.com", "subject": "Re: hello", "body": "thanks, talk soon", "is_opt_out": false}
+{"thread_id": "o19", "from_email": "ops@metroford.com", "subject": "Re: fleet", "body": "feel free to stop by, we run a non-stop bay", "is_opt_out": false}
+{"thread_id": "o20", "from_email": "owner@bodyworks.com", "subject": "Re: intro", "body": "who is this? we already have a supplier", "is_opt_out": false}
