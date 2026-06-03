@@ -26,9 +26,10 @@ def _build_llm(live: bool) -> LLMClient:
     if not live:
         return RuleBasedStubLLM()
     from outreach_agent.config import load_config
-    from outreach_agent.llm import AnthropicClient
+    from outreach_agent.llm import ClaudeCliClient
 
-    return AnthropicClient(load_config())
+    # Live runs go through the Claude CLI (subscription auth), no API key needed.
+    return ClaudeCliClient(load_config())
 
 
 def main() -> None:

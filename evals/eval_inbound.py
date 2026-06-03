@@ -5,7 +5,8 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
-from dataclasses import dataclass
+from collections import Counter
+from dataclasses import dataclass, field
 from datetime import UTC, date, datetime
 from pathlib import Path
 
@@ -15,9 +16,10 @@ from outreach_agent.inbound import (
     InboundResponder,
     InboundRoute,
     KnowledgeBase,
+    mentions_price,
 )
 from outreach_agent.safety import InMemorySuppressionStore, RegexOptOutDetector
-from outreach_agent.schedule import FixedClock
+from outreach_agent.schedule import FixedClock, SystemClock
 
 GOLDEN_PATH = Path(__file__).parent / "golden" / "inbound.jsonl"
 
@@ -137,10 +139,84 @@ def to_markdown(metrics: InboundEvalMetrics) -> str:
     )
 
 
+@dataclass(frozen=True)
+class InboundLiveMetrics:
+    """Groundedness of the real agent, measured end to end over the golden replies."""
+
+    total: int
+    optout_recall: float
+    price_leaks_in_approved: int
+    namedrop_violations_in_approved: int
+    route_counts: dict[str, int] = field(default_factory=dict)
+
+
+async def run_live() -> InboundLiveMetrics:
+    """Drive the real Agent SDK responder over the golden replies and audit output."""
+    from outreach_agent.config import load_config
+    from outreach_agent.inbound.agent import build_responder
+
+    rows = [json.loads(line) for line in GOLDEN_PATH.read_text().splitlines() if line.strip()]
+    kb = KnowledgeBase(DEFAULT_KNOWLEDGE_PATH)
+    responder = build_responder(
+        config=load_config(),
+        knowledge=kb,
+        suppression=InMemorySuppressionStore(),
+        opt_out_detector=RegexOptOutDetector(),
+        clock=SystemClock(),
+    )
+    allowed = kb.customer_names()
+
+    true_opt = caught = price_leaks = namedrop_violations = 0
+    routes: Counter[str] = Counter()
+    for row in rows:
+        reply = Reply(
+            thread_id=str(row["thread_id"]),
+            from_email=str(row["from_email"]),
+            subject=str(row["subject"]),
+            body=str(row["body"]),
+        )
+        result = await responder.respond(reply)
+        routes[result.route.value] += 1
+        if row["is_opt_out"]:
+            true_opt += 1
+            if result.route is InboundRoute.OPT_OUT:
+                caught += 1
+        if result.route is InboundRoute.AUTO_DRAFT:
+            if mentions_price(result.draft_body) or mentions_price(result.draft_subject):
+                price_leaks += 1
+            if any(n not in allowed for n in result.name_drops_used):
+                namedrop_violations += 1
+
+    return InboundLiveMetrics(
+        total=len(rows),
+        optout_recall=caught / true_opt if true_opt else 1.0,
+        price_leaks_in_approved=price_leaks,
+        namedrop_violations_in_approved=namedrop_violations,
+        route_counts=dict(routes),
+    )
+
+
+def to_markdown_live(metrics: InboundLiveMetrics) -> str:
+    """Render the live inbound groundedness report as Markdown."""
+    routes = ", ".join(f"{k}={v}" for k, v in sorted(metrics.route_counts.items()))
+    return (
+        "# Inbound responder eval (live agent, real model)\n\n"
+        f"- replies: {metrics.total}\n"
+        f"- opt-out recall (safety): {metrics.optout_recall:.3f}\n"
+        f"- price leaks in approved drafts: {metrics.price_leaks_in_approved}\n"
+        f"- name-drop violations in approved drafts: {metrics.namedrop_violations_in_approved}\n"
+        f"- routes: {routes}\n"
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run the inbound responder eval.")
-    parser.parse_args()
-    print(to_markdown(asyncio.run(run())))
+    parser.add_argument("--live", action="store_true", help="Drive the real Agent SDK responder.")
+    args = parser.parse_args()
+    if args.live:
+        print(to_markdown_live(asyncio.run(run_live())))
+    else:
+        print(to_markdown(asyncio.run(run())))
 
 
 if __name__ == "__main__":

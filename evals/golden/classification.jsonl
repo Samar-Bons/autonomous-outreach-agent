@@ -14,3 +14,27 @@
 {"id": "g14", "name": "Sunny Nail Salon", "sic": "Personal Care", "city": "Plano", "true_segment": "out_of_scope", "true_archetype": "out_of_scope"}
 {"id": "g15", "name": "Downtown Bakery", "sic": "Bakery", "city": "Dallas", "true_segment": "out_of_scope", "true_archetype": "out_of_scope"}
 {"id": "g16", "name": "Unknown Listing", "sic": "", "city": "Lewisville", "true_segment": "out_of_scope", "true_archetype": "unclear"}
+{"id": "g17", "name": "Bavarian Motor Specialists", "sic": "Auto Repair", "city": "Dallas", "true_segment": "passenger_lube", "true_archetype": "euro_specialist"}
+{"id": "g18", "name": "Prestige Import Auto", "sic": "Foreign Car Repair", "city": "Plano", "true_segment": "passenger_lube", "true_archetype": "euro_specialist"}
+{"id": "g19", "name": "Green Hybrid Auto Care", "sic": "Auto Repair", "city": "Denton", "true_segment": "passenger_lube", "true_archetype": "hybrid_specialist"}
+{"id": "g20", "name": "Jiffy Lube", "sic": "Oil Change", "city": "Arlington", "true_segment": "passenger_lube", "true_archetype": "lube_chain"}
+{"id": "g21", "name": "Valvoline Instant Oil Change", "sic": "Oil Change", "city": "Irving", "true_segment": "passenger_lube", "true_archetype": "lube_chain"}
+{"id": "g22", "name": "AAMCO Transmissions", "sic": "Transmission Repair", "city": "Garland", "true_segment": "passenger_lube", "true_archetype": "transmission_specialist"}
+{"id": "g23", "name": "Precision Transmission Specialists", "sic": "Transmission Repair", "city": "Mesquite", "true_segment": "passenger_lube", "true_archetype": "transmission_specialist"}
+{"id": "g24", "name": "Caliber Collision", "sic": "Body Shop", "city": "Frisco", "true_segment": "passenger_lube", "true_archetype": "body_shop"}
+{"id": "g25", "name": "Service King Collision Repair", "sic": "Body Shop", "city": "Richardson", "true_segment": "passenger_lube", "true_archetype": "body_shop"}
+{"id": "g26", "name": "Rush Truck Centers", "sic": "Truck Repair", "city": "Dallas", "true_segment": "hd_diesel", "true_archetype": "hd_diesel"}
+{"id": "g27", "name": "Metro Diesel Repair", "sic": "Diesel Engine Repair", "city": "Fort Worth", "true_segment": "hd_diesel", "true_archetype": "hd_diesel"}
+{"id": "g28", "name": "Interstate Fleet Services", "sic": "Fleet Services", "city": "Arlington", "true_segment": "hd_diesel", "true_archetype": "hd_diesel"}
+{"id": "g29", "name": "Gateway Chevrolet", "sic": "Auto Dealer", "city": "Plano", "true_segment": "dealer_fleet", "true_archetype": "independent_general"}
+{"id": "g30", "name": "Park Place Auto Group", "sic": "Auto Dealer", "city": "Dallas", "true_segment": "dealer_fleet", "true_archetype": "independent_general"}
+{"id": "g31", "name": "Smith Brothers Auto Repair", "sic": "Auto Repair", "city": "Denton", "true_segment": "passenger_lube", "true_archetype": "independent_general"}
+{"id": "g32", "name": "Main Street Garage", "sic": "Auto Repair", "city": "McKinney", "true_segment": "passenger_lube", "true_archetype": "independent_general"}
+{"id": "g33", "name": "Anytime Mobile Auto Repair", "sic": "Mobile Auto", "city": "Irving", "true_segment": "passenger_lube", "true_archetype": "mobile_mechanic"}
+{"id": "g34", "name": "RoadRunner Mobile Mechanics", "sic": "Mobile Auto", "city": "Garland", "true_segment": "passenger_lube", "true_archetype": "mobile_mechanic"}
+{"id": "g35", "name": "Bliss Hair Salon", "sic": "Personal Care", "city": "Frisco", "true_segment": "out_of_scope", "true_archetype": "out_of_scope"}
+{"id": "g36", "name": "Taco Loco Restaurant", "sic": "Restaurant", "city": "Dallas", "true_segment": "out_of_scope", "true_archetype": "out_of_scope"}
+{"id": "g37", "name": "Pawsitive Pet Grooming", "sic": "Pet Services", "city": "Plano", "true_segment": "out_of_scope", "true_archetype": "out_of_scope"}
+{"id": "g38", "name": "Elite Fitness Center", "sic": "Fitness Club", "city": "Allen", "true_segment": "out_of_scope", "true_archetype": "out_of_scope"}
+{"id": "g39", "name": "Bright Smile Dentistry", "sic": "Dental Office", "city": "Richardson", "true_segment": "out_of_scope", "true_archetype": "out_of_scope"}
+{"id": "g40", "name": "City Auto Service Center", "sic": "Auto Repair", "city": "Lewisville", "true_segment": "passenger_lube", "true_archetype": "independent_general"}

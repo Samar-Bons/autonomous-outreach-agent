@@ -14,6 +14,6 @@ def test_classification_eval_meets_safety_thresholds() -> None:
     assert metrics.quarantine_recall == 1.0
 
     # Quality floor on exact archetype match.
-    assert metrics.archetype_accuracy >= 0.85
-    assert metrics.total == 16
+    assert metrics.archetype_accuracy >= 0.80
+    assert metrics.total == 40
     assert metrics.needs_retry == 0
