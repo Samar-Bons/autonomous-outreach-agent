@@ -20,16 +20,16 @@ jobs:
         run: uv python install 3.12
 
       - name: Install dependencies
-        run: uv pip install --system -e ".[dev,agent]"
+        run: uv sync --extra dev --extra agent
 
       - name: Ruff (lint)
-        run: ruff check .
+        run: uv run ruff check .
 
       - name: Ruff (format)
-        run: ruff format --check .
+        run: uv run ruff format --check .
 
       - name: Pyright (types)
-        run: pyright
+        run: uv run pyright
 
       - name: Pytest
-        run: pytest
+        run: uv run pytest
