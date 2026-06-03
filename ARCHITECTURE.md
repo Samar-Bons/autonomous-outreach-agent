@@ -28,7 +28,7 @@ protocols.py   the interface layer: DataSource, LLMClient, Classifier,
 config.py      model tiers, campaign settings, warmup caps, wave offsets
 
 sources/       DataSource  -> CsvDataSource (synthetic seed)
-llm/           LLMClient   -> AnthropicClient (real) + RuleBasedStubLLM (tests)
+llm/           LLMClient   -> AnthropicClient + ClaudeCliClient (real) + RuleBasedStubLLM (tests)
 classify/      Classifier + AnglePicker (two-stage, constrained)
 enrich/        EmailFinder + EmailVerifier (synthetic, deterministic)
 copy/          template store + CopyGenerator

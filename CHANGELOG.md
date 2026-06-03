@@ -18,3 +18,6 @@ First public reference build.
 - Five eval suites with labeled golden data; stub results run in CI, live results are checked in.
 - Disk-cached and budgeted LLM clients; ops layer (heartbeat, bounce canary, daily report).
 - CI runs lint, format, strict types, and the full test suite with no API key.
+
+### Notes
+- This public reference build redacts the proprietary email copy, prompt text, and voice guide to placeholders. The architecture, safety framework, eval harness, and tests run end to end on the placeholders.

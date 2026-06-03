@@ -20,6 +20,14 @@ real business or a third-party service.
 
 ---
 
+## Highlights
+
+- A deterministic safety envelope around every model call: opt-out suppression, a pre-send draft gate, warmup caps, and idempotency keys. No safety property depends on the model being right.
+- Real eval numbers from live Claude runs, reported straight: the safety metrics land at 1.000, accuracy at 0.825 (classification) and 0.679 (angle fit). Not stub-inflated.
+- Strict typing (`pyright` strict), 192 tests, and CI that runs lint, types, and the full suite with no API key.
+- One agentic component, an inbound responder on the Claude Agent SDK; the orchestrator stays plain deterministic Python by choice.
+- Five production failure modes written up in [LESSONS.md](./LESSONS.md), each pinned by a regression test.
+
 ## Why this exists
 
 Getting a model to write a good cold email is easy. The hard part is the machine
@@ -64,7 +72,7 @@ The agent SDK is an optional dependency (`.[agent]`).
 
 ## Evals
 
-The model-driven stages are covered by eval suites, not just unit tests. The
+The model-driven stages get eval suites on top of unit tests. The
 deterministic-subject evals (opt-out, draft gate) measure code and run anywhere;
 the model-subject evals (classification, angle, inbound agent) run against live
 Claude via each eval's `--live` flag. The figures below are **real live runs**
@@ -109,11 +117,12 @@ To run the model-driven stages, evals, or the inbound agent for real, copy
 `.env.example` to `.env`, set `ANTHROPIC_API_KEY`, and use the `--live` flags or
 `pytest -m live`.
 
-## Architecture
+## Docs
 
-See [ARCHITECTURE.md](./ARCHITECTURE.md) for the design, the SOLID seams, the
-deterministic-orchestrator decision, and how the "LLM reasons, code guarantees"
-split is enforced in the type system.
+- [ARCHITECTURE.md](./ARCHITECTURE.md): the design, the SOLID seams, and how the "LLM reasons, code guarantees" split is enforced in the type system.
+- [LESSONS.md](./LESSONS.md): five production failure modes and the regression tests that guard them.
+- [CONTRIBUTING.md](./CONTRIBUTING.md): setup and the checks CI enforces.
+- [CHANGELOG.md](./CHANGELOG.md): release notes.
 
 ## What's real and what's synthetic
 
