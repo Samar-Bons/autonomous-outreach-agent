@@ -1,0 +1,35 @@
+# ABOUTME: Continuous integration: lint, type-check, and test on every push and PR.
+# ABOUTME: Runs with the stub LLM and no API key, so the full suite is green and free.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv pip install --system -e ".[dev]"
+
+      - name: Ruff (lint)
+        run: ruff check .
+
+      - name: Ruff (format)
+        run: ruff format --check .
+
+      - name: Pyright (types)
+        run: pyright
+
+      - name: Pytest
+        run: pytest
