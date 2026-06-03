@@ -28,15 +28,42 @@ protocols.py   the interface layer: DataSource, LLMClient, Classifier,
 config.py      model tiers, campaign settings, warmup caps, wave offsets
 
 sources/       DataSource  -> CsvDataSource (synthetic seed)
-llm/           LLMClient   -> AnthropicClient (real) + StubLLMClient (tests)
+llm/           LLMClient   -> AnthropicClient (real) + RuleBasedStubLLM (tests)
 classify/      Classifier + AnglePicker (two-stage, constrained)
 enrich/        EmailFinder + EmailVerifier (synthetic, deterministic)
 copy/          template store + CopyGenerator
 safety/        DraftCheck chain + SafetyGate + SuppressionStore + OptOutDetector
 schedule/      WavePlanner + Clock
 delivery/      EmailSender -> DryRunSender (default)
+inbound/       InboundResponder + guards (core) ; AgentSdkRunner + tools (Agent SDK)
 pipeline.py    the orchestrator, dependency-injected
 ```
+
+## The orchestrator is deterministic on purpose
+
+`pipeline.py` is plain Python. It does not contain or call an LLM. The model is
+confined to the classify, angle-pick, and copy stages; the control flow, the
+suppression check, the cap enforcement, and the gate all run as ordinary code.
+
+This is a deliberate decision, not an oversight. An LLM driving the
+orchestration loop (deciding what to run, in what order, with what volume) is
+less reliable and less auditable than code, and it puts a model in the one place
+where a wrong step is most expensive. Reliability lives in the deterministic
+shell; the model is a function call inside it.
+
+## The one agentic component: inbound
+
+The inbound responder is the only place an agent loop is the right tool, because
+replying to a free-text email genuinely benefits from multi-step tool use
+(search the knowledge base, look up an approved reference customer, then draft).
+It is built on the Claude Agent SDK and constrained to two in-process tools.
+
+The same thesis applies: deterministic guards wrap the agent. An opt-out is
+caught before any model call and routed straight to suppression; the agent's
+output is policed by a price guard and a name-drop allowlist, and anything that
+trips them is escalated to a human. The SDK runner sits behind an `AgentRunner`
+seam, so the guards, knowledge base, and opt-out routing are fully tested in CI
+with a faked runner, while the real agent loop runs via a live-gated test.
 
 ## SOLID seams
 
@@ -63,7 +90,13 @@ than inventing a default, because a wrong send is worse than no send.
 
 Deterministic stages get unit tests. Model-driven stages get eval suites with
 labeled data and explicit thresholds, including a hard recall-of-1.0 assertion on
-true opt-out detection. See [`evals/`](./evals).
+true opt-out detection. Each eval runs in CI with a deterministic stub and
+against a real model via `--live`. `python -m evals.run_all` regenerates the
+checked-in report at [`evals/reports/EVAL_REPORTS.md`](./evals/reports/EVAL_REPORTS.md).
+
+Five suites: classification + quarantine precision, opt-out detection, the draft
+safety-gate, angle-pick quality (LLM-as-judge), and the inbound responder's
+deterministic guarantees.
 
 ## Milestones
 
@@ -71,5 +104,6 @@ true opt-out detection. See [`evals/`](./evals).
 - **M1** classification + angle pipeline + eval #1
 - **M2** safety engine + evals #2 and #3
 - **M3** copy generation + enrichment + scheduler
-- **M4** pipeline orchestrator + e2e + eval #4
+- **M4** deterministic pipeline orchestrator + e2e + eval #4
+- **M4b** Claude Agent SDK inbound responder + eval #5
 - **M5** polish, docs, checked-in eval reports
