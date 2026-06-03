@@ -1,6 +1,6 @@
 # autonomous-outreach-agent
 
-[![ci](https://github.com/OWNER/autonomous-outreach-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/autonomous-outreach-agent/actions/workflows/ci.yml)
+[![ci](https://github.com/Samar-Bons/autonomous-outreach-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/Samar-Bons/autonomous-outreach-agent/actions/workflows/ci.yml)
 
 A reference implementation of an autonomous, safety-gated B2B cold-outreach agent.
 
