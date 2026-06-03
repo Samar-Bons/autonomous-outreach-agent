@@ -1,0 +1,21 @@
+id,name,city,state,sic,website,email,phone,employees,rating,review_count,source
+p01,Big Rig Diesel Service,Dallas,TX,Truck Repair,https://bigrigdiesel.com,,2145550101,8,4.6,120,seed
+p02,Euro Auto Werks,Plano,TX,Auto Repair,https://euroautowerks.com,,2145550102,5,4.8,90,seed
+p03,Quick Lube Express,Irving,TX,Oil Change,https://quicklubeexpress.com,,2145550103,12,4.2,210,seed
+p04,Joe's Auto Repair,Denton,TX,Auto Repair,https://joesautorepair.com,,2145550104,4,4.5,60,seed
+p05,Metroplex Ford Dealer,Arlington,TX,Auto Dealer,https://metroplexford.com,,2145550105,40,4.1,300,seed
+p06,Lone Star Fleet Maintenance,Fort Worth,TX,Fleet Services,https://lonestarfleet.com,,2145550106,25,4.4,80,seed
+p07,Sunny Nail Salon,Frisco,TX,Personal Care,https://sunnynails.com,,2145550107,6,4.9,150,seed
+p08,Downtown Bakery,Dallas,TX,Bakery,https://downtownbakery.com,,2145550108,5,4.7,200,seed
+p09,Mike's Mobile Mechanic,Carrollton,TX,Mobile Auto,https://mikesmobile.com,,2145550109,1,4.3,30,seed
+p10,Lone Star Transmission,Garland,TX,Transmission Repair,https://lonestartrans.com,,2145550110,7,4.5,70,seed
+p11,Maaco Collision and Body,Mesquite,TX,Body Shop,https://maacomesquite.com,,2145550111,10,4.0,110,seed
+p12,Discount Tire Center,McKinney,TX,Tire Dealers,https://discounttiremckinney.com,,2145550112,9,4.6,180,seed
+p13,Hybrid Battery Experts,Richardson,TX,Auto Repair,https://hybridbatteryexperts.com,,2145550113,4,4.8,55,seed
+p14,Allen Diesel and Truck,Allen,TX,Truck Repair,https://allendiesel.com,,2145550114,15,4.5,95,seed
+p15,No Website Auto,Plano,TX,Auto Repair,,,2145550115,3,4.2,20,seed
+p16,BMW Specialists of Dallas,Dallas,TX,Auto Repair,https://bmwspecialistsdallas.com,,2145550116,6,4.9,140,seed
+p17,Prime Lube Chain,Plano,TX,Oil Change,https://primelube.com,,2145550117,20,4.3,260,seed
+p18,City Auto Service,Irving,TX,Auto Repair,https://cityautoservice.com,,2145550118,8,4.4,75,seed
+p19,Heavy Haul Repairs,Fort Worth,TX,Truck Repair,https://heavyhaulrepairs.com,,2145550119,18,4.2,65,seed
+p20,Grand Salon and Spa,Frisco,TX,Personal Care,https://grandsalonspa.com,,2145550120,7,4.8,160,seed
