@@ -1,5 +1,7 @@
 # autonomous-outreach-agent
 
+[![ci](https://github.com/OWNER/autonomous-outreach-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/autonomous-outreach-agent/actions/workflows/ci.yml)
+
 A reference implementation of an autonomous, safety-gated B2B cold-outreach agent.
 
 It sources prospects, uses LLMs to decide who to pitch (and who to leave alone),
@@ -85,7 +87,7 @@ the next iteration's worklist.
 
 ```bash
 uv venv && uv pip install -e ".[dev,agent]"
-pytest                  # 143 unit/integration/e2e tests, stub LLM, no API key
+pytest                  # 190 unit/integration/e2e tests, stub LLM, no API key
 python -m evals.run_all # regenerate the eval report
 outreach run-demo       # run the whole pipeline on synthetic seed data
 ```

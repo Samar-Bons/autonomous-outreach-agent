@@ -16,14 +16,15 @@ _TIER_ALIAS: dict[ModelTier, str] = {
     ModelTier.HAIKU: "haiku",
 }
 
-# Returns the process stdout for a command, given a timeout. Injected for tests.
-RunFn = Callable[[list[str], int], str]
+# Returns the process stdout for a command, given stdin text and a timeout. Injected for tests.
+RunFn = Callable[[list[str], str, int], str]
 
 
-def _subprocess_run(cmd: list[str], timeout_s: int) -> str:
+def _subprocess_run(cmd: list[str], stdin_text: str, timeout_s: int) -> str:
     # No ANTHROPIC_API_KEY is passed, so the CLI uses the logged-in subscription.
     result = subprocess.run(
         cmd,
+        input=stdin_text,
         capture_output=True,
         text=True,
         timeout=timeout_s,
@@ -66,11 +67,12 @@ class ClaudeCliClient:
         cmd = [
             self._binary,
             "--print",
-            user,
             "--model",
             _TIER_ALIAS[tier],
             "--system-prompt",
             system,
             "--strict-mcp-config",
         ]
-        return self._run(cmd, self._timeout_s)
+        # The prompt travels via stdin, never argv, so untrusted text starting with
+        # ``-`` can never be parsed as a flag (argv flag-injection).
+        return self._run(cmd, user, self._timeout_s)

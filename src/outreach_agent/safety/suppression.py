@@ -5,6 +5,8 @@ from __future__ import annotations
 import sqlite3
 from collections.abc import Sequence
 from datetime import datetime
+from types import TracebackType
+from typing import Self
 
 from ..domain import SuppressionEntry, normalize_email
 from ..domain.enums import SuppressionReason
@@ -84,3 +86,14 @@ class SqliteSuppressionStore:
 
     def close(self) -> None:
         self._conn.close()
+
+    def __enter__(self) -> Self:
+        return self
+
+    def __exit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc: BaseException | None,
+        tb: TracebackType | None,
+    ) -> None:
+        self.close()

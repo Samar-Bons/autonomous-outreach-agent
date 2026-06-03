@@ -7,11 +7,12 @@ from datetime import UTC, date, datetime
 from outreach_agent.classify import ConstrainedAnglePicker, LLMClassifier
 from outreach_agent.copy import TemplateCopyGenerator, TemplateStore
 from outreach_agent.delivery import DryRunSender
-from outreach_agent.domain import SuppressionEntry
+from outreach_agent.domain import Draft, ScheduledSend, SuppressionEntry
 from outreach_agent.domain.enums import SuppressionReason
 from outreach_agent.enrich import SyntheticEmailFinder, SyntheticEmailVerifier
 from outreach_agent.llm import RuleBasedStubLLM
 from outreach_agent.pipeline import Pipeline, PipelineResult
+from outreach_agent.protocols import EmailSender
 from outreach_agent.safety import InMemorySuppressionStore, default_gate
 from outreach_agent.schedule import FixedClock, WarmupWavePlanner
 from outreach_agent.sources import DEFAULT_SEED_PATH, CsvDataSource
@@ -20,7 +21,7 @@ from outreach_agent.sources import DEFAULT_SEED_PATH, CsvDataSource
 _MONDAY = date(2026, 4, 20)
 
 
-def _build(suppression: InMemorySuppressionStore, sender: DryRunSender) -> Pipeline:
+def _build(suppression: InMemorySuppressionStore, sender: EmailSender) -> Pipeline:
     llm = RuleBasedStubLLM()
     clock = FixedClock(_MONDAY, datetime(2026, 4, 20, 9, 0, tzinfo=UTC))
     return Pipeline(
@@ -93,3 +94,32 @@ def test_suppressed_email_is_never_sent() -> None:
     assert result.drafts_generated == 56  # one prospect (4 waves) held back
     assert result.sent == 56
     assert all(scheduled.email != suppressed_email for scheduled, _ in sender.sent)
+
+
+class FailOneSender:
+    """EmailSender stub that fails the send for one chosen email and succeeds otherwise."""
+
+    def __init__(self, fail_email: str) -> None:
+        self._fail_email = fail_email
+        self.sent: list[tuple[ScheduledSend, Draft]] = []
+
+    def send(self, scheduled: ScheduledSend, draft: Draft) -> bool:
+        if scheduled.email == self._fail_email:
+            return False
+        self.sent.append((scheduled, draft))
+        return True
+
+
+def test_failed_sends_are_not_counted() -> None:
+    # Pick a real scheduled email, then run with a sender that fails just that one.
+    probe = DryRunSender()
+    _build(InMemorySuppressionStore(), probe).run()
+    fail_email = probe.sent[0][0].email
+    fail_count = sum(1 for scheduled, _ in probe.sent if scheduled.email == fail_email)
+
+    sender = FailOneSender(fail_email)
+    result = _build(InMemorySuppressionStore(), sender).run()
+
+    assert result.sent < result.scheduled
+    assert result.sent == len(sender.sent)
+    assert result.sent == result.scheduled - fail_count

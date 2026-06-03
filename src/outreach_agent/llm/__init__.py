@@ -3,6 +3,7 @@
 from .anthropic_client import AnthropicClient, extract_text
 from .cache import BudgetedLLMClient, BudgetExceeded, CallBudget, DiskCachedLLMClient
 from .cli_client import ClaudeCliClient
+from .parsing import strip_code_fences
 from .stub import ANGLE_MARKER, CLASSIFY_MARKER, RuleBasedStubLLM
 
 __all__ = [
@@ -16,4 +17,5 @@ __all__ = [
     "DiskCachedLLMClient",
     "RuleBasedStubLLM",
     "extract_text",
+    "strip_code_fences",
 ]

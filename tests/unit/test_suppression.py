@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from datetime import datetime
+from pathlib import Path
 
 import pytest
 
@@ -53,3 +54,15 @@ def test_all_returns_added_entries(store: SuppressionStore) -> None:
     assert len(entries) == 2
     assert {e.email for e in entries} == {"a@shop.com", "b@shop.com"}
     assert all(e.reason is SuppressionReason.OPT_OUT for e in entries)
+
+
+def test_sqlite_store_persists_across_close_and_reopen(tmp_path: Path) -> None:
+    db_path = str(tmp_path / "suppressions.db")
+    with SqliteSuppressionStore(db_path) as store:
+        store.add(_entry("owner@shop.com"))
+
+    reopened = SqliteSuppressionStore(db_path)
+    try:
+        assert reopened.is_suppressed("owner@shop.com") is True
+    finally:
+        reopened.close()

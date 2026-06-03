@@ -8,6 +8,7 @@ from typing import Protocol, cast
 
 from ..domain import Reply, SuppressionEntry
 from ..domain.enums import SuppressionReason
+from ..llm import strip_code_fences
 from ..protocols import Clock, OptOutDetector, SuppressionStore
 from .knowledge import KnowledgeBase
 from .models import InboundRoute, ResponderResult
@@ -30,13 +31,9 @@ def mentions_price(text: str) -> bool:
 
 def parse_responder_json(text: str) -> ResponderResult | None:
     """Parse the agent's JSON into a ResponderResult, or None if malformed."""
-    body = text.strip()
-    if body.startswith("```"):
-        body = body.split("\n", 1)[-1]
-        if body.endswith("```"):
-            body = body.rsplit("```", 1)[0]
+    body = strip_code_fences(text)
     try:
-        parsed = json.loads(body.strip())
+        parsed = json.loads(body)
     except json.JSONDecodeError:
         return None
     if not isinstance(parsed, dict):

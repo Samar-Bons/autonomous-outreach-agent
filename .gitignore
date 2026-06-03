@@ -15,3 +15,5 @@ build/
 *.db
 *.sqlite3
 .DS_Store
+*-cache.json
+cache.json

@@ -75,6 +75,20 @@ def test_missing_cache_file_is_tolerated(tmp_path: Path) -> None:
     assert cache.complete(tier=ModelTier.HAIKU, system="s", user="u") == "answer"
 
 
+def test_corrupt_cache_file_is_treated_as_empty(tmp_path: Path) -> None:
+    cache_path = tmp_path / "cache.json"
+    cache_path.write_text("{ not json", encoding="utf-8")
+
+    inner = CountingLLM()
+    cache = DiskCachedLLMClient(inner, cache_path)  # must not crash on construction
+
+    result = cache.complete(tier=ModelTier.HAIKU, system="s", user="u")
+    assert result == "answer"
+    assert inner.calls == 1
+    assert cache.misses == 1
+    assert cache.hits == 0
+
+
 def test_budget_allows_up_to_max_then_raises() -> None:
     budget = CallBudget(max_calls=2)
     budget.charge()

@@ -96,6 +96,7 @@ def test_idem_key_differs_per_wave() -> None:
         ("<foo@bar.com>", "foo@bar.com"),
         ('"foo@bar.com"', "foo@bar.com"),
         ("FOO@BAR.COM", "foo@bar.com"),
+        ("Joe Shop <Joe@Shop.com>", "joe@shop.com"),
     ],
 )
 def test_normalize_email(raw: str, expected: str) -> None:

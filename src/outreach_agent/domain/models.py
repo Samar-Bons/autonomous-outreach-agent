@@ -2,6 +2,7 @@
 # ABOUTME: These types are the frozen contract; stages depend on them, not on each other.
 from __future__ import annotations
 
+import re
 from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -134,6 +135,17 @@ class SuppressionEntry(_Frozen):
     added_at: datetime
 
 
+# A display-name form like ``Joe <joe@x.com>``; the real address is in the brackets.
+_ANGLE_ADDR_RE = re.compile(r"<([^<>]+)>")
+
+
 def normalize_email(email: str) -> str:
-    """Canonical form used everywhere a suppression decision is made."""
+    """Canonical form used everywhere a suppression decision is made.
+
+    A display-name form like ``Joe <joe@x.com>`` is reduced to the inner address
+    first, so it cannot bypass suppression. Bare addresses are left as-is.
+    """
+    match = _ANGLE_ADDR_RE.search(email)
+    if match is not None:
+        email = match.group(1)
     return email.strip().lower().strip("<>\"' ")

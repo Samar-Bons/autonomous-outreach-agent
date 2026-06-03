@@ -13,6 +13,11 @@ _MERGE_FIELD_RE = re.compile(r"\{[a-zA-Z0-9_]+\}")
 # Spammy all-caps words that depress deliverability when they appear in a subject.
 _SPAM_WORDS: frozenset[str] = frozenset({"FREE", "GUARANTEED", "URGENT", "WINNER", "ACT NOW"})
 
+_SPAM_WORD_RE = re.compile(
+    r"\b(?:" + "|".join(re.escape(w) for w in sorted(_SPAM_WORDS)) + r")\b",
+    re.IGNORECASE,
+)
+
 # AI-slop tells: words a model overuses. Word-boundary, case-insensitive matching.
 AI_SLOP_WORDS: frozenset[str] = frozenset(
     {
@@ -105,12 +110,13 @@ class SpamMarkerCheck:
 
     def check(self, draft: Draft) -> ValidationResult:
         subject = draft.subject
-        upper = subject.upper()
         reason: str | None = None
 
-        hit_word = next((w for w in _SPAM_WORDS if w in upper), None)
-        if hit_word is not None:
-            reason = f"spam word: {hit_word}"
+        # Spam-word match is word-boundary + case-insensitive, so "react now" does
+        # not hit "ACT NOW" and "free consultation" does not hit "FREE".
+        match = _SPAM_WORD_RE.search(subject)
+        if match is not None:
+            reason = f"spam word: {match.group(0).upper()}"
         elif "!!" in subject or "??" in subject:
             reason = "repeated punctuation"
         elif "$$" in subject:

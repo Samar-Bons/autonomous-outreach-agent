@@ -37,6 +37,9 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/outreach_agent"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"src/outreach_agent/py.typed" = "outreach_agent/py.typed"
+
 [tool.ruff]
 line-length = 100
 target-version = "py312"

@@ -1,7 +1,6 @@
 # ABOUTME: Public surface of the inbound responder: the CI-safe, SDK-free core.
 # ABOUTME: The Agent SDK runner lives in .agent and is imported explicitly where needed.
-from pathlib import Path
-
+from ..paths import SEED_DIR
 from .knowledge import KnowledgeBase
 from .models import InboundRoute, ResponderResult
 from .responder import (
@@ -11,7 +10,7 @@ from .responder import (
     parse_responder_json,
 )
 
-DEFAULT_KNOWLEDGE_PATH = Path(__file__).resolve().parents[3] / "data" / "seed" / "knowledge"
+DEFAULT_KNOWLEDGE_PATH = SEED_DIR / "knowledge"
 
 __all__ = [
     "DEFAULT_KNOWLEDGE_PATH",

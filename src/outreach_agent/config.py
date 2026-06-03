@@ -29,7 +29,6 @@ class Config:
     campaign: str = "northwind-outbound-2026"
     db_path: str = "outreach.db"
     models: dict[ModelTier, str] = field(default_factory=lambda: dict(_DEFAULT_MODELS))
-    daily_cap: int = STEADY_STATE_CAP
 
     def model_id(self, tier: ModelTier) -> str:
         """The concrete model string to send to the API for a given tier."""

@@ -65,6 +65,26 @@ trips them is escalated to a human. The SDK runner sits behind an `AgentRunner`
 seam, so the guards, knowledge base, and opt-out routing are fully tested in CI
 with a faked runner, while the real agent loop runs via a live-gated test.
 
+### Why the inbound agent is safe to point at untrusted email
+
+Inbound email is attacker-controlled text, so the drafting agent is wrapped in
+deterministic guards it cannot talk its way past:
+
+1. Opt-out detection runs first, deterministically, and suppresses before any
+   model call. Opt-outs never reach the LLM.
+2. The price guard and name-drop allowlist run on the model's output, not its
+   input, so a prompt-injected draft that quotes a price or invents a customer
+   is downgraded to a human escalation.
+3. The agent is confined to two read-only knowledge-base tools. It has no
+   filesystem, shell, network, or write access.
+4. `setting_sources=[]` keeps project, user, and global config out of the agent,
+   so no ambient instruction can widen its capabilities.
+5. `max_turns` bounds the loop, and every result is a draft a human approves.
+   The agent never sends.
+
+The key idea: the guards police the output, so injection in the email body
+cannot bypass them.
+
 ## SOLID seams
 
 - **Dependency inversion.** Every stage depends on a `Protocol`, never on a

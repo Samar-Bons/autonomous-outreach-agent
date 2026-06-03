@@ -107,8 +107,11 @@ class Pipeline:
                     blocked += 1
 
         scheduled: list[ScheduledSend] = self._planner.plan(drafts, {}) if drafts else []
-        for send, draft in zip(scheduled, drafts, strict=True):
-            self._sender.send(send, draft)
+        sent = sum(
+            1
+            for send, draft in zip(scheduled, drafts, strict=True)
+            if self._sender.send(send, draft)
+        )
 
         return PipelineResult(
             total_prospects=len(prospects),
@@ -119,5 +122,5 @@ class Pipeline:
             drafts_generated=len(drafts),
             drafts_blocked=blocked,
             scheduled=len(scheduled),
-            sent=len(scheduled),
+            sent=sent,
         )

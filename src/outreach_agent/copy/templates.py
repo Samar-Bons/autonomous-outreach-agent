@@ -7,10 +7,9 @@ from functools import cached_property
 from pathlib import Path
 
 from ..domain.enums import Segment, Wave
+from ..paths import SEED_DIR
 
-# templates.py -> copy -> outreach_agent -> src -> repo root.
-_REPO_ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_TEMPLATES_PATH = _REPO_ROOT / "data" / "seed" / "templates.json"
+DEFAULT_TEMPLATES_PATH = SEED_DIR / "templates.json"
 
 # Shape of the loaded JSON: segment -> angle_key -> wave-as-str -> {subject, body}.
 _TemplateMap = dict[str, dict[str, dict[str, dict[str, str]]]]

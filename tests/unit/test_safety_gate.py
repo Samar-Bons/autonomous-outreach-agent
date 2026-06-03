@@ -55,6 +55,15 @@ def test_spam_marker_caps_word_blocks() -> None:
     assert _has_failure(result, "spam_marker", CheckSeverity.BLOCK)
 
 
+def test_spam_marker_word_boundary_does_not_false_positive() -> None:
+    # "react now" is clean: word-boundary matching means it does not trip on the
+    # ACT NOW spam word as a substring (the old upper()-substring match did).
+    assert SpamMarkerCheck().check(make_draft(subject="React now to our note")).passed is True
+    # A genuine spam word at a word boundary still blocks.
+    spammy = SpamMarkerCheck().check(make_draft(subject="FREE MONEY for your shop"))
+    assert _has_failure(spammy, "spam_marker", CheckSeverity.BLOCK)
+
+
 def test_spam_marker_repeated_punctuation_blocks() -> None:
     draft = make_draft(subject="Are you in?? Let me know")
     result = SpamMarkerCheck().check(draft)

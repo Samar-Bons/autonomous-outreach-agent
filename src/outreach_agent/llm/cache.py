@@ -21,7 +21,7 @@ class DiskCachedLLMClient:
     """LLMClient wrapper that memoizes decisions to a JSON file on disk.
 
     WHY: outreach re-runs over a slowly-changing population. Once a prospect's
-    decision is cached, re-running the pipeline is near-free — only genuinely
+    decision is cached, re-running the pipeline is near-free; only genuinely
     fresh inputs ever reach the inner client and spend tokens. The cache is
     content-addressed (sha256 of tier|system|user) so any change to the prompt
     or model tier is correctly treated as a new decision.
@@ -36,12 +36,15 @@ class DiskCachedLLMClient:
 
     @staticmethod
     def _load(cache_path: Path) -> dict[str, str]:
-        """Read the cache file once at construction; a missing file is an empty cache."""
+        """Read the cache file once at construction.
+
+        A missing, unreadable, or corrupt cache file is treated as an empty cache.
+        """
         try:
             raw = cache_path.read_text(encoding="utf-8")
-        except FileNotFoundError:
+            return json.loads(raw)
+        except (FileNotFoundError, json.JSONDecodeError, OSError):
             return {}
-        return json.loads(raw)
 
     def _persist(self) -> None:
         """Write the whole cache atomically: temp file then os.replace, so no half-written JSON."""
@@ -100,7 +103,7 @@ class BudgetedLLMClient:
     """LLMClient wrapper that charges a CallBudget before every delegated call.
 
     WHY: this is the hard ceiling that stops a runaway loop from spending
-    unboundedly — the budget is charged first, so a breach raises before the
+    unboundedly. The budget is charged first, so a breach raises before the
     inner client is ever invoked.
     """
 
