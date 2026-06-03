@@ -1,0 +1,278 @@
+{
+  "passenger_lube": {
+    "next_day_delivery": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    },
+    "net_30_terms": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    },
+    "bulk_supply": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    },
+    "full_viscosity_range": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    },
+    "specialty_euro": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    },
+    "local_proximity": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    }
+  },
+  "hd_diesel": {
+    "def_in_stock": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    },
+    "ci4_older_engines": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    },
+    "fleet_one_stop": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    },
+    "bulk_supply": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    },
+    "next_day_delivery": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    }
+  },
+  "dealer_fleet": {
+    "oem_spec_match": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    },
+    "volume_pricing": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    },
+    "net_30_terms": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    },
+    "next_day_delivery": {
+      "1": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "2": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "3": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      },
+      "4": {
+        "subject": "a quick supply question",
+        "body": "Hi {shop_name}, this is placeholder copy for the public reference build. The production templates are proprietary and omitted. We supply oil to shops in {city}; reply if it is useful."
+      }
+    }
+  }
+}
