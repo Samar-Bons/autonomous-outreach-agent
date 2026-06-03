@@ -1,0 +1,16 @@
+{"id": "g01", "name": "Big Rig Diesel Service", "sic": "Truck Repair", "city": "Dallas", "true_segment": "hd_diesel", "true_archetype": "hd_diesel"}
+{"id": "g02", "name": "Lone Star Fleet Maintenance", "sic": "Fleet Services", "city": "Fort Worth", "true_segment": "hd_diesel", "true_archetype": "hd_diesel"}
+{"id": "g03", "name": "Euro Auto Werks", "sic": "Auto Repair", "city": "Plano", "true_segment": "passenger_lube", "true_archetype": "euro_specialist"}
+{"id": "g04", "name": "BMW & Mercedes Specialists", "sic": "Auto Repair", "city": "Frisco", "true_segment": "passenger_lube", "true_archetype": "euro_specialist"}
+{"id": "g05", "name": "Hybrid Battery Experts", "sic": "Auto Repair", "city": "Richardson", "true_segment": "passenger_lube", "true_archetype": "hybrid_specialist"}
+{"id": "g06", "name": "Lone Star Transmission", "sic": "Transmission Repair", "city": "Garland", "true_segment": "passenger_lube", "true_archetype": "transmission_specialist"}
+{"id": "g07", "name": "Maaco Collision & Body", "sic": "Body Shop", "city": "Mesquite", "true_segment": "passenger_lube", "true_archetype": "body_shop"}
+{"id": "g08", "name": "Quick Lube Express", "sic": "Oil Change", "city": "Irving", "true_segment": "passenger_lube", "true_archetype": "lube_chain"}
+{"id": "g09", "name": "Metroplex Ford Dealer", "sic": "Auto Dealer", "city": "Arlington", "true_segment": "dealer_fleet", "true_archetype": "independent_general"}
+{"id": "g10", "name": "Joe's Auto Repair", "sic": "Auto Repair", "city": "Denton", "true_segment": "passenger_lube", "true_archetype": "independent_general"}
+{"id": "g11", "name": "Discount Tire Center", "sic": "Tire Dealers", "city": "McKinney", "true_segment": "passenger_lube", "true_archetype": "independent_general"}
+{"id": "g12", "name": "Autobahn Motors", "sic": "Auto Repair", "city": "Allen", "true_segment": "passenger_lube", "true_archetype": "euro_specialist"}
+{"id": "g13", "name": "Mike's Mobile Mechanic", "sic": "Mobile Auto", "city": "Carrollton", "true_segment": "passenger_lube", "true_archetype": "mobile_mechanic"}
+{"id": "g14", "name": "Sunny Nail Salon", "sic": "Personal Care", "city": "Plano", "true_segment": "out_of_scope", "true_archetype": "out_of_scope"}
+{"id": "g15", "name": "Downtown Bakery", "sic": "Bakery", "city": "Dallas", "true_segment": "out_of_scope", "true_archetype": "out_of_scope"}
+{"id": "g16", "name": "Unknown Listing", "sic": "", "city": "Lewisville", "true_segment": "out_of_scope", "true_archetype": "unclear"}
