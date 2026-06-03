@@ -104,6 +104,13 @@ the **safety-critical metrics are the ones that come out perfect**. The angle
 eval doing its job and flagging 8 weak picks is a feature, not a blemish; it is
 the next iteration's worklist.
 
+**The knobs that produced these figures are redacted.** The prompts and tuning
+behind the model-driven numbers are proprietary and stripped to placeholders in
+this public build, so re-running `--live` on the stub prompts will not reproduce
+them. What is here and fully reproducible: the eval harness, the labeled golden
+sets, and the deterministic evals (opt-out, draft gate), which depend on no
+redacted knobs.
+
 ## Quickstart
 
 ```bash

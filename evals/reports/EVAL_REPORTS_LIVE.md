@@ -9,6 +9,14 @@ Sonnet** for the LLM-as-judge and the inbound agent. The deterministic evals
 Reproduce the model-driven runs with the `--live` flag on each eval; the
 deterministic ones run anywhere with `python -m evals.run_all`.
 
+> **Redacted knobs.** The model-driven figures were produced with the
+> production-style prompts and tuning, which are proprietary and redacted from
+> this public build (the prompt text here is a placeholder stub). The eval
+> harness and the labeled golden sets are included and run, but re-running
+> `--live` on the stub prompts will not reproduce these exact numbers. The
+> deterministic evals (opt-out, draft gate) depend on no redacted knobs and
+> reproduce exactly.
+
 ---
 
 ## Classification + quarantine (live Haiku, n=40)
