@@ -1,12 +1,17 @@
-# ABOUTME: Public surface of the LLM layer: the real client, the stub, and text extraction.
-# ABOUTME: Both clients satisfy the LLMClient Protocol and are swapped by dependency injection.
+# ABOUTME: Public surface of the LLM layer: real client, stub, caching, budget, text extraction.
+# ABOUTME: All clients satisfy the LLMClient Protocol and are composed by dependency injection.
 from .anthropic_client import AnthropicClient, extract_text
+from .cache import BudgetedLLMClient, BudgetExceeded, CallBudget, DiskCachedLLMClient
 from .stub import ANGLE_MARKER, CLASSIFY_MARKER, RuleBasedStubLLM
 
 __all__ = [
     "ANGLE_MARKER",
     "CLASSIFY_MARKER",
     "AnthropicClient",
+    "BudgetExceeded",
+    "BudgetedLLMClient",
+    "CallBudget",
+    "DiskCachedLLMClient",
     "RuleBasedStubLLM",
     "extract_text",
 ]
