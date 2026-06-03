@@ -61,18 +61,25 @@ The agent SDK is an optional dependency (`.[agent]`).
 
 ## Evals
 
-The model-driven stages are covered by eval suites, not just unit tests. They
-run in CI with a deterministic stub (no API key) and against a real model via
-each eval's `--live` flag. Latest checked-in numbers
-([evals/reports/EVAL_REPORTS.md](./evals/reports/EVAL_REPORTS.md)):
+The model-driven stages are covered by eval suites, not just unit tests. The
+deterministic-subject evals (opt-out, draft gate) measure code and run anywhere;
+the model-subject evals (classification, angle, inbound agent) run against live
+Claude via each eval's `--live` flag. The figures below are **real live runs**
+(2026-06-03), not stub numbers
+([full report](./evals/reports/EVAL_REPORTS_LIVE.md)):
 
-| Eval | Headline metric |
-|---|---|
-| Classification + quarantine | pitch precision **1.000**, quarantine recall **1.000** |
-| Opt-out detection | recall **1.000** (the CAN-SPAM safety line), precision 1.000 |
-| Draft safety-gate | detection **1.000**, 0 false positives |
-| Angle-pick quality (LLM-as-judge) | mean score 0.900 |
-| Inbound guarantees | opt-out recall **1.000**, both output guards trip |
+| Eval | Subject | Real figure |
+|---|---|---|
+| Classification + quarantine | live Haiku, n=40 | archetype acc 0.825; **pitch precision 1.000, quarantine recall 1.000** |
+| Opt-out detection | deterministic, n=20 | **recall 1.000** (the CAN-SPAM line), precision 1.000 |
+| Draft safety-gate | deterministic, n=18 | detection 1.000, 0 false positives |
+| Angle-pick quality | live LLM-as-judge, n=24 | mean 0.679 (surfaced 8 weak picks to fix) |
+| Inbound responder | live Agent SDK, n=10 | opt-out recall 1.000; **0 price / name-drop leaks** in approved drafts |
+
+The story these tell: accuracy is honest (0.825 archetype, 0.679 angle fit), and
+the **safety-critical metrics are the ones that come out perfect**. The angle
+eval doing its job and flagging 8 weak picks is a feature, not a blemish; it is
+the next iteration's worklist.
 
 ## Quickstart
 
