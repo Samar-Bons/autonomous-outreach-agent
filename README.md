@@ -1,4 +1,4 @@
-# autonomous-outreach-agent
+# Autonomous Outreach Agent
 
 [![ci](https://github.com/Samar-Bons/autonomous-outreach-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/Samar-Bons/autonomous-outreach-agent/actions/workflows/ci.yml)
 
