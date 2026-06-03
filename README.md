@@ -40,9 +40,11 @@ engineering, and it is what this repo shows.
 
 ```mermaid
 flowchart TD
-    S["Source<br/>load prospects"] --> CL{"Classify + pick angle<br/>(LLM)"}
-    CL -->|"out of scope / no fit"| DROP(["dropped / held"])
-    CL --> EN["Enrich<br/>find + verify email"]
+    S["Source<br/>load prospects"] --> CL{"Classify<br/>segment + archetype (LLM)"}
+    CL -->|"out of scope / unclear"| DROP(["dropped / held"])
+    CL -->|"in scope"| PA{"Pick angle<br/>constrained shortlist (LLM)"}
+    PA -->|"no fitting angle"| DROP
+    PA --> EN["Enrich<br/>find + verify email"]
     EN -->|"no deliverable email"| DROP
     EN --> SUP{"Suppressed?<br/>opt-out / bounce"}
     SUP -->|"yes"| DROP
@@ -54,7 +56,7 @@ flowchart TD
     classDef llm fill:#1e3a8a,stroke:#60a5fa,color:#fff
     classDef gate fill:#7f1d1d,stroke:#f87171,color:#fff
     classDef drop fill:#374151,stroke:#9ca3af,color:#fff
-    class CL llm
+    class CL,PA llm
     class SUP,GATE gate
     class DROP drop
 ```
