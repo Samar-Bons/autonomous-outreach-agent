@@ -70,7 +70,9 @@ class ResendSender:
       double-delivers.
     * ``scheduled_at`` is passed through so Resend honors the planned send time.
     * ``List-Unsubscribe`` and ``List-Unsubscribe-Post`` headers are always
-      attached for CAN-SPAM / RFC 8058 one-click-unsubscribe compliance.
+      attached. This emits a ``mailto:`` unsubscribe target; full RFC 8058
+      one-click also needs an HTTPS POST endpoint that records the suppression,
+      which a production deployment would add.
     """
 
     def __init__(

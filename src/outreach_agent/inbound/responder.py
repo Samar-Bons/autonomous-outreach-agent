@@ -116,8 +116,18 @@ class InboundResponder:
         if result.route is InboundRoute.AUTO_DRAFT:
             if mentions_price(result.draft_body) or mentions_price(result.draft_subject):
                 return _escalate("draft quoted a price")
+            # Trust the draft text, not the model's self-report. Escalate on any
+            # declared reference outside the allowlist, and on any allowlisted
+            # customer that appears in the draft without being declared (an
+            # evasive under-report). A wholly fabricated name in free prose is
+            # caught at human approval, not by this guard.
             allowed = self._knowledge.customer_names()
-            invented = [n for n in result.name_drops_used if n not in allowed]
-            if invented:
-                return _escalate(f"draft named non-allowlisted customers: {invented}")
+            declared = set(result.name_drops_used)
+            text = f"{result.draft_subject}\n{result.draft_body}".lower()
+            off_list = sorted(declared - allowed)
+            if off_list:
+                return _escalate(f"draft declared non-allowlisted customers: {off_list}")
+            undeclared = sorted(n for n in allowed if n.lower() in text and n not in declared)
+            if undeclared:
+                return _escalate(f"draft references undeclared customers: {undeclared}")
         return result

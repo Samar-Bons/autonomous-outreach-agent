@@ -42,9 +42,9 @@ class Pipeline:
 
     Every stage is injected, so the same orchestrator runs the real components in
     production and the stub-backed components in tests. The orchestrator itself
-    holds no LLM: the model lives only inside the classifier, picker, and copy
-    generator, and the safety guarantees (suppression, the gate, caps) are this
-    plain code.
+    holds no LLM: the model lives only inside the classifier and angle picker.
+    Copy generation is deterministic template rendering, and the safety
+    guarantees (suppression, the gate, caps) are this plain code.
     """
 
     def __init__(

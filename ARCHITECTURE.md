@@ -42,8 +42,15 @@ pipeline.py    the orchestrator, dependency-injected
 ## The orchestrator is deterministic on purpose
 
 `pipeline.py` is plain Python. It does not contain or call an LLM. The model is
-confined to the classify, angle-pick, and copy stages; the control flow, the
-suppression check, the cap enforcement, and the gate all run as ordinary code.
+confined to the classify and angle-pick stages (copy is deterministic template
+rendering); the control flow, the suppression check, the cap enforcement, and
+the gate all run as ordinary code.
+
+Waves are scheduled up front, so honoring an opt-out that arrives after wave 1
+is a separate, deterministic sweep: `cancel_suppressed_sends` runs each cycle
+and cancels any still-scheduled wave to a now-suppressed address (the reference
+build's stand-in for the production audit pass). Suppression is enforced both at
+scheduling time and by this sweep, so a late opt-out still cancels waves 2-4.
 
 This is a deliberate decision, not an oversight. An LLM driving the
 orchestration loop (deciding what to run, in what order, with what volume) is
@@ -72,9 +79,11 @@ deterministic guards it cannot talk its way past:
 
 1. Opt-out detection runs first, deterministically, and suppresses before any
    model call. Opt-outs never reach the LLM.
-2. The price guard and name-drop allowlist run on the model's output, not its
-   input, so a prompt-injected draft that quotes a price or invents a customer
-   is downgraded to a human escalation.
+2. The price guard and name-drop allowlist run on the model's output text, not
+   its self-report, so a prompt-injected draft that quotes a price, or names a
+   customer from our list it did not declare, is downgraded to a human
+   escalation. A wholly fabricated reference in free prose is the residual case,
+   caught at human approval rather than by the guard.
 3. The agent is confined to two read-only knowledge-base tools. It has no
    filesystem, shell, network, or write access.
 4. `setting_sources=[]` keeps project, user, and global config out of the agent,

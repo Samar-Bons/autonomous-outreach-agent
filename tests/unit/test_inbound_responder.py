@@ -94,6 +94,17 @@ async def test_invented_name_drop_is_escalated() -> None:
     assert result.route is InboundRoute.ESCALATE
 
 
+async def test_undeclared_allowlisted_name_in_body_is_escalated() -> None:
+    # The model names an allowlisted customer in the body but reports none.
+    # The guard reads the draft text, not the self-report, so this escalates.
+    runner = _CannedRunner(
+        _draft_json(draft_body="We already supply Maple Ridge Auto nearby.", name_drops_used=[])
+    )
+    responder = _responder(runner, InMemorySuppressionStore())
+    result = await responder.respond(_reply("any references near Plano?"))
+    assert result.route is InboundRoute.ESCALATE
+
+
 async def test_allowlisted_name_drop_passes() -> None:
     runner = _CannedRunner(_draft_json(name_drops_used=["Maple Ridge Auto"]))
     responder = _responder(runner, InMemorySuppressionStore())

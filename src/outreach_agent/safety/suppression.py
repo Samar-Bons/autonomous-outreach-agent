@@ -8,8 +8,9 @@ from datetime import datetime
 from types import TracebackType
 from typing import Self
 
-from ..domain import SuppressionEntry, normalize_email
-from ..domain.enums import SuppressionReason
+from ..domain import ScheduledSend, SuppressionEntry, normalize_email
+from ..domain.enums import SendStatus, SuppressionReason
+from ..protocols import SuppressionStore
 
 _CREATE_TABLE = """
 CREATE TABLE IF NOT EXISTS suppressions (
@@ -97,3 +98,27 @@ class SqliteSuppressionStore:
         tb: TracebackType | None,
     ) -> None:
         self.close()
+
+
+def cancel_suppressed_sends(
+    sends: Sequence[ScheduledSend], suppression: SuppressionStore
+) -> list[ScheduledSend]:
+    """Cancel any still-scheduled send to a now-suppressed address.
+
+    The pipeline schedules every wave up front, so a prospect who opts out after
+    wave 1 has waves 2-4 already on the calendar. This sweep runs each cycle and
+    cancels those future sends, mirroring the production audit pass. It returns a
+    new list: SCHEDULED sends to a suppressed address become CANCELLED, and every
+    other send passes through unchanged.
+    """
+    swept: list[ScheduledSend] = []
+    for send in sends:
+        if send.status is SendStatus.SCHEDULED and suppression.is_suppressed(send.email):
+            swept.append(
+                send.model_copy(
+                    update={"status": SendStatus.CANCELLED, "cancel_reason": "suppressed"}
+                )
+            )
+        else:
+            swept.append(send)
+    return swept

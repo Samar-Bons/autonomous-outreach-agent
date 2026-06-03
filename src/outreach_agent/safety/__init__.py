@@ -9,7 +9,11 @@ from .checks import (
 )
 from .gate import DefaultSafetyGate, default_checks, default_gate
 from .optout import RegexOptOutDetector
-from .suppression import InMemorySuppressionStore, SqliteSuppressionStore
+from .suppression import (
+    InMemorySuppressionStore,
+    SqliteSuppressionStore,
+    cancel_suppressed_sends,
+)
 
 __all__ = [
     "AiSlopCheck",
@@ -21,6 +25,7 @@ __all__ = [
     "RegexOptOutDetector",
     "SpamMarkerCheck",
     "SqliteSuppressionStore",
+    "cancel_suppressed_sends",
     "default_checks",
     "default_gate",
 ]

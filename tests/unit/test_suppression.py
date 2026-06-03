@@ -3,15 +3,19 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
 
-from outreach_agent.domain import SuppressionEntry
-from outreach_agent.domain.enums import SuppressionReason
+from outreach_agent.domain import ScheduledSend, SuppressionEntry
+from outreach_agent.domain.enums import SendStatus, SuppressionReason, Wave
 from outreach_agent.protocols import SuppressionStore
-from outreach_agent.safety.suppression import InMemorySuppressionStore, SqliteSuppressionStore
+from outreach_agent.safety.suppression import (
+    InMemorySuppressionStore,
+    SqliteSuppressionStore,
+    cancel_suppressed_sends,
+)
 
 StoreFactory = Callable[[], SuppressionStore]
 
@@ -66,3 +70,27 @@ def test_sqlite_store_persists_across_close_and_reopen(tmp_path: Path) -> None:
         assert reopened.is_suppressed("owner@shop.com") is True
     finally:
         reopened.close()
+
+
+def _scheduled(email: str) -> ScheduledSend:
+    return ScheduledSend(
+        prospect_id="p",
+        email=email,
+        wave=Wave.BUMP,
+        send_at=datetime(2026, 4, 23, 11, 0, tzinfo=UTC),
+        idem_key=f"c/{email}-w2",
+    )
+
+
+def test_cancel_suppressed_sends_cancels_only_suppressed() -> None:
+    store = InMemorySuppressionStore()
+    store.add(_entry("opted@out.com"))
+
+    swept = cancel_suppressed_sends(
+        [_scheduled("opted@out.com"), _scheduled("fine@shop.com")], store
+    )
+    by_email = {s.email: s for s in swept}
+
+    assert by_email["opted@out.com"].status is SendStatus.CANCELLED
+    assert by_email["opted@out.com"].cancel_reason == "suppressed"
+    assert by_email["fine@shop.com"].status is SendStatus.SCHEDULED

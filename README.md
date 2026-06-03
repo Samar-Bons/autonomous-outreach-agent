@@ -41,15 +41,16 @@ source -> classify -> (quarantine?) -> enrich -> generate -> SAFETY GATE -> sche
 | Source | Load prospects from a data source | code |
 | Classify | Segment + archetype; quarantine over guess | **LLM** |
 | Enrich | Find and verify a contact email | code |
-| Generate | Render grounded copy for the chosen angle | **LLM** + templates |
+| Generate | Render the chosen angle's template (deterministic merge) | code |
 | Safety gate | Merge-leak, spam, AI-slop, wrong-brand, suppression | code |
 | Schedule | Wave offsets under warmup caps | code |
 | Send | Deliver (dry-run by default) | code |
 
 The orchestrator that runs these stages is **plain deterministic Python, by
-design**. The model lives only inside classify, angle-pick, and copy; it is
-never in the control loop. Letting an LLM drive orchestration is the failure
-mode this architecture exists to avoid.
+design**. The model lives only inside classify and angle selection; copy is
+deterministic template rendering, and the model is never in the control loop.
+Letting an LLM drive orchestration is the failure mode this architecture exists
+to avoid.
 
 ## Inbound: the one agentic component
 
@@ -87,7 +88,7 @@ the next iteration's worklist.
 
 ```bash
 uv venv && uv pip install -e ".[dev,agent]"
-pytest                  # 190 unit/integration/e2e tests, stub LLM, no API key
+pytest                  # 192 unit/integration/e2e tests, stub LLM, no API key
 python -m evals.run_all # regenerate the eval report
 outreach run-demo       # run the whole pipeline on synthetic seed data
 ```
