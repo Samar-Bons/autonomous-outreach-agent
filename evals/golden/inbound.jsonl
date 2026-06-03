@@ -1,0 +1,10 @@
+{"thread_id": "i01", "from_email": "a@shop1.com", "subject": "re: oil", "body": "please unsubscribe me", "is_opt_out": true}
+{"thread_id": "i02", "from_email": "b@shop2.com", "subject": "re: oil", "body": "remove me from your list", "is_opt_out": true}
+{"thread_id": "i03", "from_email": "c@shop3.com", "subject": "re: oil", "body": "stop emailing me about this", "is_opt_out": true}
+{"thread_id": "i04", "from_email": "d@shop4.com", "subject": "re: oil", "body": "take me off your list please", "is_opt_out": true}
+{"thread_id": "i05", "from_email": "e@shop5.com", "subject": "re: oil", "body": "what synthetic oils do you stock?", "is_opt_out": false}
+{"thread_id": "i06", "from_email": "f@shop6.com", "subject": "re: oil", "body": "can you send a quote for bulk DEF?", "is_opt_out": false}
+{"thread_id": "i07", "from_email": "g@shop7.com", "subject": "re: oil", "body": "do you deliver to Plano next day?", "is_opt_out": false}
+{"thread_id": "i08", "from_email": "h@shop8.com", "subject": "re: oil", "body": "not interested right now, maybe later", "is_opt_out": false}
+{"thread_id": "i09", "from_email": "i@shop9.com", "subject": "re: oil", "body": "feel free to stop by the shop anytime", "is_opt_out": false}
+{"thread_id": "i10", "from_email": "j@shop10.com", "subject": "re: oil", "body": "who are your reference customers near Fort Worth?", "is_opt_out": false}
