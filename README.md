@@ -38,21 +38,34 @@ engineering, and it is what this repo shows.
 
 ## The pipeline
 
-```
-source -> classify -> (quarantine?) -> enrich -> generate -> SAFETY GATE -> schedule -> send
-                          |                                       |
-                     never pitched                  deterministic checks + suppression
+```mermaid
+flowchart TD
+    A["Source<br/>load prospects"] --> B{"Classify<br/>segment + archetype"}
+    B -->|"out-of-scope / unclear"| X1(["quarantined"])
+    B -->|"in scope"| C{"Pick angle"}
+    C -->|"no fitting angle"| X2(["dropped"])
+    C --> D["Enrich<br/>find + verify email"]
+    D -->|"no deliverable email"| X3(["dropped"])
+    D --> E{"Suppressed?<br/>opt-out / bounce"}
+    E -->|"yes"| X4(["suppressed"])
+    E -->|"no"| F["Generate<br/>render angle template, 4 waves"]
+    F --> G{"Safety gate<br/>merge-leak / spam / AI-slop / wrong-brand"}
+    G -->|"block"| X5(["held"])
+    G -->|"pass"| H["Schedule<br/>warmup caps, wave offsets"]
+    H --> I["Send<br/>dry-run by default"]
+
+    classDef llm fill:#1e3a8a,stroke:#60a5fa,color:#fff
+    classDef gate fill:#7f1d1d,stroke:#f87171,color:#fff
+    classDef drop fill:#374151,stroke:#9ca3af,color:#fff
+    class B,C llm
+    class E,G gate
+    class X1,X2,X3,X4,X5 drop
 ```
 
-| Stage | What it does | Who decides |
-|---|---|---|
-| Source | Load prospects from a data source | code |
-| Classify | Segment + archetype; quarantine over guess | **LLM** |
-| Enrich | Find and verify a contact email | code |
-| Generate | Render the chosen angle's template (deterministic merge) | code |
-| Safety gate | Merge-leak, spam, AI-slop, wrong-brand, suppression | code |
-| Schedule | Wave offsets under warmup caps | code |
-| Send | Deliver (dry-run by default) | code |
+Blue nodes are LLM reasoning (classify, pick angle). Red nodes are the
+deterministic safety gates (the suppression check and the draft gate).
+Everything else is plain code. A prospect is dropped at any branch it fails:
+the system would rather send nothing than send the wrong thing.
 
 The orchestrator that runs these stages is **plain deterministic Python, by
 design**. The model lives only inside classify and angle selection; copy is
