@@ -40,26 +40,23 @@ engineering, and it is what this repo shows.
 
 ```mermaid
 flowchart TD
-    A["Source<br/>load prospects"] --> B{"Classify<br/>segment + archetype"}
-    B -->|"out-of-scope / unclear"| X1(["quarantined"])
-    B -->|"in scope"| C{"Pick angle"}
-    C -->|"no fitting angle"| X2(["dropped"])
-    C --> D["Enrich<br/>find + verify email"]
-    D -->|"no deliverable email"| X3(["dropped"])
-    D --> E{"Suppressed?<br/>opt-out / bounce"}
-    E -->|"yes"| X4(["suppressed"])
-    E -->|"no"| F["Generate<br/>render angle template, 4 waves"]
-    F --> G{"Safety gate<br/>merge-leak / spam / AI-slop / wrong-brand"}
-    G -->|"block"| X5(["held"])
-    G -->|"pass"| H["Schedule<br/>warmup caps, wave offsets"]
-    H --> I["Send<br/>dry-run by default"]
+    S["Source<br/>load prospects"] --> CL{"Classify + pick angle<br/>(LLM)"}
+    CL -->|"out of scope / no fit"| DROP(["dropped / held"])
+    CL --> EN["Enrich<br/>find + verify email"]
+    EN -->|"no deliverable email"| DROP
+    EN --> SUP{"Suppressed?<br/>opt-out / bounce"}
+    SUP -->|"yes"| DROP
+    SUP -->|"no"| GEN["Generate copy<br/>template, 4 waves"]
+    GEN --> GATE{"Safety gate<br/>merge-leak · spam · slop · brand"}
+    GATE -->|"blocked"| DROP
+    GATE -->|"pass"| OUT["Schedule + send<br/>caps · waves · idempotency"]
 
     classDef llm fill:#1e3a8a,stroke:#60a5fa,color:#fff
     classDef gate fill:#7f1d1d,stroke:#f87171,color:#fff
     classDef drop fill:#374151,stroke:#9ca3af,color:#fff
-    class B,C llm
-    class E,G gate
-    class X1,X2,X3,X4,X5 drop
+    class CL llm
+    class SUP,GATE gate
+    class DROP drop
 ```
 
 Blue nodes are LLM reasoning (classify, pick angle). Red nodes are the
