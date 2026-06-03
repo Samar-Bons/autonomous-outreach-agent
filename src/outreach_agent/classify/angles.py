@@ -34,6 +34,8 @@ SEGMENT_ANGLES: dict[Segment, tuple[str, ...]] = {
 # Each archetype maps to a shortlist of candidate angles. The picker intersects
 # this with the segment's available angles. An empty intersection drops the
 # prospect rather than guessing an angle.
+# Illustrative routing for this reference build. The real archetype-to-angle
+# shortlists are tuned per business and are not part of the public repo.
 ARCHETYPE_SHORTLISTS: dict[Archetype, tuple[str, ...]] = {
     Archetype.EURO_SPECIALIST: ("specialty_euro", "full_viscosity_range", "oem_spec_match"),
     Archetype.HYBRID_SPECIALIST: ("full_viscosity_range", "specialty_euro", "next_day_delivery"),

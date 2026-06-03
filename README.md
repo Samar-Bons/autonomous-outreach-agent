@@ -122,6 +122,12 @@ Agent SDK integration, strict typing, and the test suite. Synthetic: the
 company, the prospect data, the knowledge base, and the email addresses. No
 scrapers target any real site; the data-acquisition layer reads a CSV.
 
+Deliberately omitted: the email copy (`templates.json`), the prompt text, and
+the voice guide are redacted to placeholders. The copy and prompts are
+proprietary, so this repo demonstrates the architecture, safety framework, eval
+harness, and tests, not the production content. The system runs end to end on
+the placeholders.
+
 ## License
 
 MIT. See [LICENSE](./LICENSE).
