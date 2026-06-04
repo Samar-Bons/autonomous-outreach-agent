@@ -2,7 +2,8 @@
 
 [![ci](https://github.com/Samar-Bons/autonomous-outreach-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/Samar-Bons/autonomous-outreach-agent/actions/workflows/ci.yml)
 
-A reference implementation of an autonomous, safety-gated B2B cold-outreach agent.
+A reference implementation of an autonomous, **eval-driven**, safety-gated B2B
+cold-outreach agent.
 
 It sources prospects, uses LLMs to decide who to pitch (and who to leave alone),
 generates grounded per-prospect copy, runs every draft through a deterministic
@@ -22,8 +23,8 @@ real business or a third-party service.
 
 ## Highlights
 
+- **Eval-driven.** Every model-driven stage has an eval suite with labeled data, and live Claude runs report honest numbers (safety metrics at 1.000, accuracy 0.825 and 0.679), not stub-inflated. [Full report](./evals/reports/EVAL_REPORTS_LIVE.md).
 - A deterministic safety envelope around every model call: opt-out suppression, a pre-send draft gate, warmup caps, and idempotency keys. No safety property depends on the model being right.
-- Real eval numbers from live Claude runs, reported straight: the safety metrics land at 1.000, accuracy at 0.825 (classification) and 0.679 (angle fit).
 - Strict typing (`pyright` strict), 192 tests, and CI that runs lint, types, and the full suite with no API key.
 - One agentic component, an inbound responder on the Claude Agent SDK; the orchestrator stays plain deterministic Python by choice.
 - Five production failure modes written up in [LESSONS.md](./LESSONS.md), each pinned by a regression test.
@@ -87,7 +88,7 @@ The agent SDK is an optional dependency (`.[agent]`).
 The model-driven stages get eval suites on top of unit tests. The
 deterministic-subject evals (opt-out, draft gate) measure code and run anywhere;
 the model-subject evals (classification, angle, inbound agent) run against live
-Claude via each eval's `--live` flag. 
+Claude via each eval's `--live` flag. The figures below are **real live runs**
 ([full report](./evals/reports/EVAL_REPORTS_LIVE.md)):
 
 | Eval | Subject | Real figure |
@@ -151,7 +152,7 @@ scrapers target any real site; the data-acquisition layer reads a CSV.
 
 Deliberately omitted: the email copy (`templates.json`), the prompt text, and
 the voice guide are redacted to placeholders. The copy and prompts are
-results of running several experimental evaluations, so this repo demonstrates the architecture, safety framework, eval
+proprietary, so this repo demonstrates the architecture, safety framework, eval
 harness, and tests, not the production content. The system runs end to end on
 the placeholders.
 
