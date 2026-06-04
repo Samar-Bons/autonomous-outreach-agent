@@ -23,7 +23,7 @@ real business or a third-party service.
 ## Highlights
 
 - A deterministic safety envelope around every model call: opt-out suppression, a pre-send draft gate, warmup caps, and idempotency keys. No safety property depends on the model being right.
-- Real eval numbers from live Claude runs, reported straight: the safety metrics land at 1.000, accuracy at 0.825 (classification) and 0.679 (angle fit). Not stub-inflated.
+- Real eval numbers from live Claude runs, reported straight: the safety metrics land at 1.000, accuracy at 0.825 (classification) and 0.679 (angle fit).
 - Strict typing (`pyright` strict), 192 tests, and CI that runs lint, types, and the full suite with no API key.
 - One agentic component, an inbound responder on the Claude Agent SDK; the orchestrator stays plain deterministic Python by choice.
 - Five production failure modes written up in [LESSONS.md](./LESSONS.md), each pinned by a regression test.
@@ -72,7 +72,7 @@ deterministic template rendering, and the model is never in the control loop.
 Letting an LLM drive orchestration is the failure mode this architecture exists
 to avoid.
 
-## Inbound: the one agentic component
+## Inbound: the agentic component
 
 Replies are handled by a grounded responder built on the **Claude Agent SDK**.
 It is restricted to two in-process knowledge-base tools (search + a
@@ -87,8 +87,7 @@ The agent SDK is an optional dependency (`.[agent]`).
 The model-driven stages get eval suites on top of unit tests. The
 deterministic-subject evals (opt-out, draft gate) measure code and run anywhere;
 the model-subject evals (classification, angle, inbound agent) run against live
-Claude via each eval's `--live` flag. The figures below are **real live runs**
-(2026-06-03), not stub numbers
+Claude via each eval's `--live` flag. 
 ([full report](./evals/reports/EVAL_REPORTS_LIVE.md)):
 
 | Eval | Subject | Real figure |
@@ -152,7 +151,7 @@ scrapers target any real site; the data-acquisition layer reads a CSV.
 
 Deliberately omitted: the email copy (`templates.json`), the prompt text, and
 the voice guide are redacted to placeholders. The copy and prompts are
-proprietary, so this repo demonstrates the architecture, safety framework, eval
+results of running several experimental evaluations, so this repo demonstrates the architecture, safety framework, eval
 harness, and tests, not the production content. The system runs end to end on
 the placeholders.
 

@@ -28,7 +28,7 @@ protocols.py   the interface layer: DataSource, LLMClient, Classifier,
 config.py      model tiers, campaign settings, warmup caps, wave offsets
 
 sources/       DataSource  -> CsvDataSource (synthetic seed)
-llm/           LLMClient   -> AnthropicClient + ClaudeCliClient (real) + RuleBasedStubLLM (tests)
+llm/           LLMClient   -> AnthropicClient + ClaudeCliClient + RuleBasedStubLLM
 classify/      Classifier + AnglePicker (two-stage, constrained)
 enrich/        EmailFinder + EmailVerifier (synthetic, deterministic)
 copy/          template store + CopyGenerator
@@ -58,7 +58,7 @@ less reliable and less auditable than code, and it puts a model in the one place
 where a wrong step is most expensive. Reliability lives in the deterministic
 shell; the model is a function call inside it.
 
-## The one agentic component: inbound
+## The agentic component: inbound
 
 The inbound responder is the only place an agent loop is the right tool, because
 replying to a free-text email genuinely benefits from multi-step tool use
